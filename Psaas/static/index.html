@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <title>Psaas - Party supplies as a Service</title>
+    <link rel="shortcut icon" href="static/images/favicon.ico?v=2" type="image/x-icon">
+    <link href="static/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="mainContent">
+        <div class="header">
+            <h1>Psaas - Party supplies as a service</h1>
+        </div>
+        <div class="body">
+            <div class="leftPanel">
+                <div class="formContent">
+                    <div class="form-header">
+                        <h2>Order Party supplies</h2>
+                    </div>
+                    <form id="json-form" onsubmit="makeOrder()" autocomplete="off">
+                        <div class="form-row">
+                            <input type="text" name="ordered_by" placeholder="Name" class="form-text" id="ordered_by" />
+                        </div>
+
+                        <div class="form-row">
+                            <select class="form-text" name="items">
+                                <option value="" disabled selected>Preferred item</option>
+                                <option>Beers</option>
+                                <option>Chips</option>
+                                <option>Balloons</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <input type="number" class="form-text" name="count" max="10" min="0" placeholder="Amount" />
+                        </div>
+                        <div class="form-row">
+                            <input class="submit form-text" type="submit" value="Submit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="rightPanel">
+                <div class="formContent">
+                    <div class="card"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="static/app.js"></script>
+</body>
+</html>
