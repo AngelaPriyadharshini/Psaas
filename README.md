@@ -8,6 +8,8 @@ If you don't have Python tools installed, follow the steps given below
 3. Then select Python tools for Visual Studio and install
 4. Now you can manage flask projects.
 
+![2017-08-19](https://user-images.githubusercontent.com/21333896/29486989-f379d788-850f-11e7-815c-d4e4a7ec500c.png)
+
 ## How to run the application
 Please follow the steps in order to run this app in Visual Studio 
 1. Download the project and unzip the project.
