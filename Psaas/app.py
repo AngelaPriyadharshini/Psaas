@@ -16,9 +16,9 @@ def root():
 class Psaas():
     @app.route('/orders', methods=['GET'])
     def renderblog():
-        filename = os.path.join(app.static_folder, 'data.json')
-        with open(filename) as blog_file:
-            data = json.load(blog_file)
+        DATA_FILENAME = os.path.join(app.static_folder, 'data.json')
+        with open(DATA_FILENAME) as json_file:
+            data = json.load(json_file)
             print (data)
             return jsonify({'orders':data})
 
@@ -27,11 +27,11 @@ class Psaas():
     @app.route("/orders", methods=['POST'])
     def create_task():
         DATA_FILENAME = os.path.join(app.static_folder, 'data.json')
-        with open(DATA_FILENAME) as feedsjson:
-            orders=json.load(feedsjson)
-        with open(DATA_FILENAME, mode='w', encoding='utf-8') as feedsjson:
-            json.dump([], feedsjson)
-        with open(DATA_FILENAME, mode='w', encoding='utf-8') as feedsjson:
+        with open(DATA_FILENAME) as json_file:
+            orders=json.load(json_file)
+        with open(DATA_FILENAME, mode='w', encoding='utf-8') as json_file:
+            json.dump([], json_file)
+        with open(DATA_FILENAME, mode='w', encoding='utf-8') as json_file:
             if not request.json or not 'ordered_by' in request.json:
                     abort(400)
             order = {
@@ -42,14 +42,9 @@ class Psaas():
                 'count': request.json.get('count', "")
                 }
             orders.append(order)
-            json.dump(orders, feedsjson)
+            json.dump(orders, json_file)
             print (orders)
             return jsonify({'orders': orders}), 201
-  
 
 if __name__ == '__main__':
     app.run()
-
-
-
-

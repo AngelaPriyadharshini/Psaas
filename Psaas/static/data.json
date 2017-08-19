@@ -19,5 +19,12 @@
     "items": "Beer",
     "ordered_by": "Jessi",
     "ordered_on": "Fri, 11 Aug 2017 00:00:00 GMT"
+  },
+  {
+    "count": "5",
+    "id": 4,
+    "items": "Chips",
+    "ordered_by": "Samantha",
+    "ordered_on": "Sat, 19 Aug 2017 15:43:09 GMT"
   }
 ]
