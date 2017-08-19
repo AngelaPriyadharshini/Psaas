@@ -1,0 +1,23 @@
+[
+  {
+    "count": 2,
+    "id": 1,
+    "items": "Beer",
+    "ordered_by": "Jake",
+    "ordered_on": "Sat, 12 Aug 2017 19:01:26 GMT"
+  },
+  {
+    "count": 5,
+    "id": 2,
+    "items": "Chips",
+    "ordered_by": "Steve",
+    "ordered_on": "Fri, 11 Aug 2017 00:00:00 GMT"
+  },
+  {
+    "count": 1,
+    "id": 3,
+    "items": "Beer",
+    "ordered_by": "Jessi",
+    "ordered_on": "Fri, 11 Aug 2017 00:00:00 GMT"
+  }
+]

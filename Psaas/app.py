@@ -3,16 +3,9 @@ from flask.json import jsonify
 from datetime import datetime
 from flask.wrappers import Response
 from flask_cors import CORS, cross_origin
-import MySQLdb
+import os
 
 app = Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:mySQLp@ssw0rd@localhost/db_psaas'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'mySQLp@ssw0rd'
-app.config['MYSQL_DATABASE_DB'] = 'db_psaas'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 
 wsgi_app = app.wsgi_app
 
@@ -22,33 +15,41 @@ def root():
 
 class Psaas():
     @app.route('/orders', methods=['GET'])
-    def get():
-        if request.method == 'GET':
-            db = MySQLdb.connect("localhost","root","mySQLp@ssw0rd","db_psaas" )
-            cursor = db.cursor()
-            cursor.execute("SELECT * from party_orders")
-            rows = cursor.fetchall()
-            orders = []
-            for result in rows:
-                orders.append({
-                'id':result[0],
-                'ordered_on':result[1],
-                'ordered_by':result[2],
-                'items':result[3],
-                'count':result[4]
-            })
-        return jsonify({'orders':orders})
+    def renderblog():
+        filename = os.path.join(app.static_folder, 'data.json')
+        with open(filename) as blog_file:
+            data = json.load(blog_file)
+            print (data)
+            return jsonify({'orders':data})
+
 
    
     @app.route("/orders", methods=['POST'])
-    def add():
-        jsdata = request.get_json(force=True)
-        print(jsdata)
-        db = MySQLdb.connect("localhost","root","mySQLp@ssw0rd","db_psaas" )
-        cursor = db.cursor()
-        cursor.execute("INSERT INTO party_orders (OrderedOn, OrderedBy, Item, Count) VALUES (%s,%s,%s,%s)", (datetime.now(),jsdata['ordered_by'], jsdata['items'], jsdata['count']))
-        db.commit()
-        return Response(jsdata)  
+    def create_task():
+        DATA_FILENAME = os.path.join(app.static_folder, 'data.json')
+        with open(DATA_FILENAME) as feedsjson:
+            orders=json.load(feedsjson)
+        with open(DATA_FILENAME, mode='w', encoding='utf-8') as feedsjson:
+            json.dump([], feedsjson)
+        with open(DATA_FILENAME, mode='w', encoding='utf-8') as feedsjson:
+            if not request.json or not 'ordered_by' in request.json:
+                    abort(400)
+            order = {
+                'id': orders[-1]['id'] + 1,
+                'ordered_on': datetime.now(),
+                'ordered_by': request.json['ordered_by'],
+                'items': request.json.get('items', ""),
+                'count': request.json.get('count', "")
+                }
+            orders.append(order)
+            json.dump(orders, feedsjson)
+            print (orders)
+            return jsonify({'orders': orders}), 201
+  
 
 if __name__ == '__main__':
     app.run()
+
+
+
+

@@ -33,6 +33,7 @@
   <ItemGroup>
     <Content Include="requirements.txt" />
     <Content Include="static\app.js" />
+    <Content Include="static\data.json" />
     <Content Include="static\images\example-desktop.png" />
     <Content Include="static\images\example-mobile.png" />
     <Content Include="static\images\favicon.ico" />
